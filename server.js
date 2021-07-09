@@ -18,6 +18,10 @@ app.use(express.static('public'));
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", { useNewUrlParser: true });
 
+app.get('/api/workouts', (req, res) => {
+  res.json([]);
+});
+
 app.get('/exercise', (req, res) => {
   res.sendFile(path.join(__dirname, './public/exercise.html'));
 });
