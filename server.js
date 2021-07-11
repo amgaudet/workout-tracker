@@ -62,17 +62,17 @@ app.put('/api/workouts/:id', (req, res) => {
   db.Workout.findOneAndUpdate(
     { _id: req.params.id },
     { $push: { exercises: req.body } },
-    { new: true }
-  )
-    .then(newSet => {
-      console.log(newSet);
-      res.json(newSet);
-    }).catch(err => {
-      res.json(err);
+    { new: true },
+    (err, data) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.send(data);
+      }
     });
 });
 
-
+//Creates new workout
 app.post('/api/workouts', (req, res) => {
   db.Workout.create(req.body, (err, data) => {
     if (err) {
@@ -93,5 +93,5 @@ app.get('/stats', (req, res) => {
 
 app.listen(PORT, () => {
   //change log before pushing to server
-  console.log(`App running at http://localhost:${PORT}`)
-})
+  console.log(`App running at Port: ${PORT}`);
+});
