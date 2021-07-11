@@ -21,12 +21,13 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", { use
 app.get('/api/workouts', (req, res) => {
   db.Workout.aggregate([
     {
+      //Shows total weight and Duration for work out
       $addFields: {
         totalWeight: { $sum: '$exercises.weight' },
         totalDuration: { $sum: '$exercises.duration' }
       }
     },
-    { $sort: { day: -1 } }, { $limit: 7 }
+    { $sort: { day: 1 } }
   ], (err, data) => {
     if (err) {
       res.send(err);
@@ -40,6 +41,7 @@ app.get('/api/workouts', (req, res) => {
 app.get('/api/workouts/range', (req, res) => {
   db.Workout.aggregate([
     {
+      //Shows total weight and Duration for work out
       $addFields: {
         totalWeight: { $sum: '$exercises.weight' },
         totalDuration: { $sum: '$exercises.duration' }
