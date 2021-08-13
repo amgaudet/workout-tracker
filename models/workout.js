@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const WorkoutSchema = new Schema({
+  //check format of date
   day: {
     type: Date,
     default: Date.now
@@ -18,6 +19,7 @@ const WorkoutSchema = new Schema({
         trim: true,
         required: true
       },
+      //too ambiguous
       duration: {
         type: Number,
         required: true
